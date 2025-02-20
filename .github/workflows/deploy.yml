@@ -2,18 +2,27 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [master]  # Runs when you push to the main branch
+    branches:
+      - master  # Change this if your branch is `main`
+
+permissions:
+  contents: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3  # Get the latest code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: .  # Deploys the root directory (adjust if needed)
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages  # Deploy to the gh-pages branch
-          folder: .  # Deploy everything in the repo
+        uses: actions/deploy-pages@v2
