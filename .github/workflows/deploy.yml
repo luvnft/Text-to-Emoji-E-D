@@ -33,3 +33,6 @@ jobs:
         uses: actions/deploy-pages@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Invalidate GitHub Pages Cache
+        run: curl -X PURGE https://YashVMishra.github.io/Text-to-Emoji-E-D
